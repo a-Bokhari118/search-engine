@@ -1,7 +1,10 @@
+import Links from './Links';
+
 const Search = () => {
   return (
     <div>
-      <h1>Search</h1>
+      search
+      <Links />
     </div>
   );
 };

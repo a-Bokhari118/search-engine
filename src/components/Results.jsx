@@ -14,7 +14,7 @@ const Results = () => {
       if (location.pathname === '/videos') {
         getResults(`/search/q=${searchTerm} videos`);
       } else {
-        getResults(`${location.pathname}/q=${searchTerm}&num=40`);
+        getResults(`${location.pathname}/q=${searchTerm}&num=60`);
       }
     }
   }, [searchTerm, location.pathname]);
@@ -50,7 +50,7 @@ const Results = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <img src={image.src} alt={title} loading="lazy" />
+              <img src={image?.src} alt={title} loading="lazy" />
               <p className="w-36 break-words text-sm mt-2">{title}</p>
             </a>
           ))}
@@ -70,12 +70,12 @@ const Results = () => {
                 <p className="text-lg dark:text-blue-300 text-blue-700">
                   {title}
                 </p>
-                <div className="flex gap-4">
-                  <a href={source?.href} target="_blank" rel="noreferrer">
-                    {source?.href}
-                  </a>
-                </div>
               </a>
+              <div className="flex gap-4">
+                <a href={source?.href} target="_blank" rel="noreferrer">
+                  {source?.href}
+                </a>
+              </div>
             </div>
           ))}
         </div>
