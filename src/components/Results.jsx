@@ -7,21 +7,22 @@ import Loading from './Loading';
 
 const Results = () => {
   const { results, isLoading, getResults, searchTerm } = useResultsContext();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if (searchTerm) {
-      if (location.pathname === '/videos') {
+      if (pathname === '/videos') {
         getResults(`/search/q=${searchTerm} videos`);
+        console.log(pathname);
       } else {
-        getResults(`${location.pathname}/q=${searchTerm}&num=60`);
+        getResults(`${pathname}/q=${searchTerm}&num=60`);
       }
     }
-  }, [searchTerm, location.pathname]);
+  }, [pathname, searchTerm]);
 
   if (isLoading) return <Loading />;
 
-  switch (location.pathname) {
+  switch (pathname) {
     case '/search':
       return (
         <div className="flex flex-wrap justify-between space-y-6 sm:px-56">
@@ -82,12 +83,12 @@ const Results = () => {
       );
     case '/videos':
       return (
-        <div className="flex flex-wrap justify-center">
-          {results.map((video, index) => (
+        <div className="flex flex-wrap ">
+          {results?.map((video, index) => (
             <div key={index} className="p-2">
-              {video?.additional_links[0]?.href && (
+              {video?.additional_links?.[0]?.href && (
                 <ReactPlayer
-                  url={video?.additional_links[0]?.href}
+                  url={video?.additional_links?.[0]?.href}
                   controls
                   width="355px"
                   height="200px"
